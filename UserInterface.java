@@ -39,6 +39,21 @@ class UserInterface {
         System.out.println("This option you've chosen does not exist");
     }
 
+    /**
+     * When user chooses a letter rather than a number
+     */
+    public void noLetterMainMenuError(){
+        System.out.println("Please input a number NOT A LETTER\n");
+    }
+
+    /**
+     * When the user chooses a number that is outside the range
+     * from the main menu
+     */
+    public void mainMenuNumberError() {
+        System.out.println("The number you have chosen is not in the choice provided, please choose another number\n");
+    }
+
     public void gameExit(){
         System.out.println("Game has been terminated...");
     }

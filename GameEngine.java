@@ -8,6 +8,7 @@
  * This is where the logic of the game
  * to be handled
  */
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class GameEngine{
@@ -38,8 +39,25 @@ class GameEngine{
      * 2 = exit
      */
     public void mainMenu(){
-        ui.mainMenu();
-        choice = kb.nextInt();
+        boolean loop = true;
+
+        // loop until choice is made
+        while(loop) {
+            try {
+                ui.mainMenu();
+                choice = kb.nextInt();
+                if(choice == 1 || choice == 2) {
+                    loop = false;
+                } else {
+                    ui.mainMenuNumberError();
+                }
+
+            } catch(InputMismatchException e){
+                System.out.println(e);
+                ui.noLetterMainMenuError();
+                kb.nextLine();
+            }
+        }
 
         switch(choice){
             case 1: 
