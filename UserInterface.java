@@ -70,6 +70,41 @@ class UserInterface {
     }
 
     /**
+     * prompts what user will choose
+     */
+    public void userChooses() {
+        System.out.print("User Chooses (number):\n"
+                        + ">> ");
+    }
+
+    /**
+     * Prints board array of x's and o's to keep track
+     * and for testing
+     * 
+     * @param array
+     */
+    public void printBoardArrayTest(String[] array){
+        for(int i = 0; i < array.length; i++){
+            System.out.println(i + " => " + array[i]);
+        }
+    }
+
+    /**
+     * When the user/oponent chooses an invalid option
+     */
+    public void invalidChoiceBoard(){
+        System.out.println("That number has been taken, please choose another one");
+    }
+
+    /**
+     * prompts what oponent uses
+     */
+    public void oponentChooses() {
+        System.out.print("Opponent Chooses:\n"
+                        + ">> ");
+    }
+
+    /**
      * Exits the game
      */
     public void gameExit(){

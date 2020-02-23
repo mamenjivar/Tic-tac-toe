@@ -18,7 +18,10 @@ class GameEngine{
     Scanner kb;
 
     int choiceMainMenu = 0;
-    String choiceXorO = "";
+    int gameChoice = 0;
+    String choiceXorOUser = "";
+
+    // String[] boardArray; // keeps track of x's and o's on the board
 
     // Default constructor
     GameEngine() {
@@ -26,6 +29,8 @@ class GameEngine{
         board = new Board();
 
         kb = new Scanner(System.in);
+
+        // boardArray = new String[9];
     }
 
     /**
@@ -45,7 +50,6 @@ class GameEngine{
     public void mainMenu(){
         boolean loop = true;
 
-        // loop until choice is made
         while(loop) {
             try {
                 ui.mainMenu();
@@ -84,7 +88,30 @@ class GameEngine{
     public void playGame(){
         decisionXorO();
 
-        
+        board.printBoardFull();
+
+        boolean loop = true;
+        while(loop) {
+            ui.userChooses();
+            gameChoice = kb.nextInt();
+
+
+            if(board.isValid(gameChoice - 1)){
+                // can throw exception when array out of bounds
+                board.addtoBoardUser(gameChoice - 1);
+            } else {
+                ui.invalidChoiceBoard();
+            }
+
+            loop = false;
+        }
+
+        board.printPlayingBoard();
+
+
+        // CHECK: if option is already taken
+        // CHECK: if board is full
+        // CHECK: throw exception if array out of bounds
     }
 
     /**
@@ -95,10 +122,11 @@ class GameEngine{
 
         while (loop) {
             ui.chooseXorO();
-            choiceXorO = kb.nextLine();
+            choiceXorOUser = kb.nextLine();
             System.out.println();
 
-            if (choiceXorO.toUpperCase().equals("X") || choiceXorO.toUpperCase().equals("O")) {
+            if (choiceXorOUser.toUpperCase().equals("X") || choiceXorOUser.toUpperCase().equals("O")) {
+                board.setXoroUser(choiceXorOUser);
                 loop = false;
             } else {
                 ui.xorOErrorChoice();

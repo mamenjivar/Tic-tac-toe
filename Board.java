@@ -9,7 +9,18 @@
  * rendering the game board logic
  */
 class Board {
-    String xoro = "";
+    // user x or o
+    String xoroUser = "";
+
+    // keeps track of x's and o's on the board in an array
+    String[] boardArray;
+
+    /**
+     * default constructor
+     */
+    Board() {
+        boardArray = new String[9];
+    }
 
     /**
      * Prints an empty board
@@ -42,12 +53,54 @@ class Board {
     }
 
     /**
+     * print the playing board with x's or o's or empty
+     * with numbers
+     */
+    public void printPlayingBoard() {
+
+        System.out.println("   |   |   ");
+        System.out.println(" " + ((boardArray[0] != null) ? boardArray[0] : 1) + " | " + ((boardArray[1] != null) ? boardArray[1] : 2) + " | "+ ((boardArray[2] != null) ? boardArray[2] : 3) + " ");
+        System.out.println("___|___|___");
+        System.out.println("   |   |   ");
+        System.out.println(" " + ((boardArray[3] != null) ? boardArray[3] : 4) + " | " + ((boardArray[4] != null) ? boardArray[4] : 5) + " | " + ((boardArray[5] != null) ? boardArray[5] : 6) + " ");
+        System.out.println("___|___|___");
+        System.out.println("   |   |   ");
+        System.out.println(" " + ((boardArray[6] != null) ? boardArray[6] : 7) + " | " + ((boardArray[7] != null) ? boardArray[7] : 8) + " | " + ((boardArray[8] != null) ? boardArray[8] : 9) + " ");
+        System.out.println("   |   |   ");
+    }
+
+    /**
      * Sets if user will be X or O (setter)
      * 
      * @param xoro
      */
-    public void setXoro(String xoro){
-        this.xoro = xoro.toUpperCase();
+    public void setXoroUser(String xoro){
+        this.xoroUser = xoro.toUpperCase();
+    }
+
+    /**
+     * Checks if tile is empty or not
+     * 
+     * @param tile
+     * @return
+     * true = empty
+     * false = not empty
+     */
+    public boolean isValid(int tile){
+        if(boardArray[tile] == null){
+            return true;
+        }
+
+        return false;            
+    }
+
+    /**
+     * Adds value x or o to board in array
+     * 
+     * @param xoro
+     */
+    public void addtoBoardUser(int xoro) {
+        boardArray[xoro] = xoroUser;
     }
 
     /**
@@ -55,7 +108,7 @@ class Board {
      * 
      * @return
      */
-    public String getXoro(){
-        return xoro;
+    public String getXoroUser(){
+        return xoroUser;
     }
 }
