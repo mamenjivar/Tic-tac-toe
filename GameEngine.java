@@ -91,27 +91,93 @@ class GameEngine{
         board.printBoardFull();
 
         boolean loop = true;
+        boolean playerLoop = true;
+        boolean opponentLoop = true;
         while(loop) {
-            ui.userChooses();
-            gameChoice = kb.nextInt();
+            playerLoop = true;
+            opponentLoop = true;
+            // user making choice
+            if (!board.isBoardFull()) {
+                while(playerLoop){
+                    ui.userChooses();
+                    gameChoice = kb.nextInt();
 
+                    if (board.isValid(gameChoice - 1)) {
+                        board.addtoBoardUser(gameChoice - 1);
+                        playerLoop = false;
 
-            if(board.isValid(gameChoice - 1)){
-                // can throw exception when array out of bounds
-                board.addtoBoardUser(gameChoice - 1);
+                        board.printPlayingBoard();
+                    } else {
+                        ui.invalidChoiceBoard();
+                    }
+                }
             } else {
-                ui.invalidChoiceBoard();
+                loop = false;
+                break;
             }
 
-            loop = false;
+            if(board.didUserWin()){
+                loop = false;
+                gameWon(1);
+                break;
+            }
+
+            if(!board.isBoardFull()){
+                // opponent choice
+                while (opponentLoop) {
+                    ui.oponentChooses();
+                    gameChoice = kb.nextInt();
+
+                    if (board.isValid(gameChoice - 1)) {
+                        board.addtoBoardOpponent(gameChoice - 1);
+                        opponentLoop = false;
+
+                        board.printPlayingBoard();
+                    } else {
+                        ui.invalidChoiceBoard();
+                    }
+                }
+            } else {
+                loop = false;
+            }
+
+            if (board.didOpponentWin()) {
+                loop = false;
+                gameWon(2);
+                break;
+            }
         }
 
+        System.out.println("\nThe game has ended"); // MOVE THIS OUT
+        gameWon(3);
         board.printPlayingBoard();
 
 
         // CHECK: if option is already taken
         // CHECK: if board is full
         // CHECK: throw exception if array out of bounds
+    }
+
+    /**
+     * When the game ends
+     * 
+     * @param index
+     */
+    public void gameWon(int index){
+        switch(index){
+            case 1:
+                ui.gameEndedUser();
+                exitGame();
+                break;
+            case 2:
+                ui.gameEndedOpponent();
+                exitGame();
+                break;
+            case 3:
+                ui.gameEndedDraw();
+                exitGame();
+                break;
+        }
     }
 
     /**
@@ -138,6 +204,7 @@ class GameEngine{
      * exits the game
      */
     public void exitGame(){
+        kb.close();
         ui.gameExit();
         System.exit(0);
     }

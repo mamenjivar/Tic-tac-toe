@@ -11,6 +11,7 @@
 class Board {
     // user x or o
     String xoroUser = "";
+    String xoroOpponent = "";
 
     // keeps track of x's and o's on the board in an array
     String[] boardArray;
@@ -70,12 +71,95 @@ class Board {
     }
 
     /**
+     * checks if user wins
+     * @return
+     */
+    public boolean didUserWin() {
+        // 1st row
+        if((boardArray[0] == xoroUser) && (boardArray[1] == xoroUser) && (boardArray[2] == xoroUser)){
+            return true;
+        } // 2nd row
+         else if((boardArray[3] == xoroUser) && (boardArray[4] == xoroUser) && (boardArray[5] == xoroUser)) {
+            return true;
+        } // 3rd row
+        else if((boardArray[6] == xoroUser) && (boardArray[7] == xoroUser) && (boardArray[8] == xoroUser)){
+            return true;
+        } // 1st column
+        else if((boardArray[0] == xoroUser) && (boardArray[3] == xoroUser) && (boardArray[6] == xoroUser)) {
+            return true;
+        } // 2nd column
+        else if((boardArray[1] == xoroUser) && (boardArray[4] == xoroUser) && (boardArray[7] == xoroUser)) {
+            return true;
+        } // 3rd column
+        else if ((boardArray[2] == xoroUser) && (boardArray[5] == xoroUser) && (boardArray[8] == xoroUser)) {
+            return true;
+        } // diagonal left
+        else if((boardArray[0] == xoroUser) && (boardArray[4] == xoroUser) && (boardArray[8] == xoroUser)) {
+            return true;
+        }
+        else if((boardArray[2] == xoroUser) && (boardArray[4] == xoroUser) && (boardArray[6] == xoroUser)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    /**
+     * checks if user wins
+     * 
+     * @return
+     */
+    public boolean didOpponentWin() {
+        // 1st row
+        if ((boardArray[0] == xoroOpponent) && (boardArray[1] == xoroOpponent) && (boardArray[2] == xoroOpponent)) {
+            return true;
+        } // 2nd row
+        else if ((boardArray[3] == xoroOpponent) && (boardArray[4] == xoroOpponent) && (boardArray[5] == xoroOpponent)) {
+            return true;
+        } // 3rd row
+        else if ((boardArray[6] == xoroOpponent) && (boardArray[7] == xoroOpponent) && (boardArray[8] == xoroOpponent)) {
+            return true;
+        } // 1st column
+        else if ((boardArray[0] == xoroOpponent) && (boardArray[3] == xoroOpponent) && (boardArray[6] == xoroOpponent)) {
+            return true;
+        } // 2nd column
+        else if ((boardArray[1] == xoroOpponent) && (boardArray[4] == xoroOpponent) && (boardArray[7] == xoroOpponent)) {
+            return true;
+        } // 3rd column
+        else if ((boardArray[2] == xoroOpponent) && (boardArray[5] == xoroOpponent) && (boardArray[8] == xoroOpponent)) {
+            return true;
+        } // diagonal left
+        else if ((boardArray[0] == xoroOpponent) && (boardArray[4] == xoroOpponent) && (boardArray[8] == xoroOpponent)) {
+            return true;
+        } else if ((boardArray[2] == xoroOpponent) && (boardArray[4] == xoroOpponent) && (boardArray[6] == xoroOpponent)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * checks what user chooses, then
+     * gives oponnent the opposite choice
+     */
+    public void setOpponent(){
+        if(xoroUser.equals("X")) {
+            xoroOpponent = "O";
+        } else {
+            xoroOpponent = "X";
+        }
+    }
+
+    /**
      * Sets if user will be X or O (setter)
      * 
      * @param xoro
      */
     public void setXoroUser(String xoro){
         this.xoroUser = xoro.toUpperCase();
+
+        setOpponent();
     }
 
     /**
@@ -95,12 +179,37 @@ class Board {
     }
 
     /**
+     * checks if game board is full
+     * 
+     * @return
+     * true = not empty
+     * false = empty
+     */
+    public boolean isBoardFull(){
+        for(int i = 0; i < boardArray.length; i++){
+            if(boardArray[i] == null){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Adds value x or o to board in array
      * 
      * @param xoro
      */
     public void addtoBoardUser(int xoro) {
         boardArray[xoro] = xoroUser;
+    }
+
+    /**
+     * Adds value x or o to board in array
+     * 
+     * @param xoro
+     */
+    public void addtoBoardOpponent(int xoro){
+        boardArray[xoro] = xoroOpponent;
     }
 
     /**

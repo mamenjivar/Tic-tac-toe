@@ -105,6 +105,27 @@ class UserInterface {
     }
 
     /**
+     * when there are no winners in this game
+     */
+    public void gameEndedDraw() {
+        System.out.println("Game has ended in draw");
+    }
+
+    /**
+     * game ended and USER wins
+     */
+    public void gameEndedUser() {
+        System.out.println("User has won!");
+    }
+
+    /**
+     * game ended and OPPONENT wins
+     */
+    public void gameEndedOpponent() {
+        System.out.println("Opponent has won!");
+    }
+
+    /**
      * Exits the game
      */
     public void gameExit(){
