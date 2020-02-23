@@ -13,14 +13,18 @@ import java.util.Scanner;
 
 class GameEngine{
     UserInterface ui;
+    Board board;
     
     Scanner kb;
 
-    int choice = 0;
+    int choiceMainMenu = 0;
+    String choiceXorO = "";
 
     // Default constructor
     GameEngine() {
         ui = new UserInterface();
+        board = new Board();
+
         kb = new Scanner(System.in);
     }
 
@@ -45,8 +49,11 @@ class GameEngine{
         while(loop) {
             try {
                 ui.mainMenu();
-                choice = kb.nextInt();
-                if(choice == 1 || choice == 2) {
+                choiceMainMenu = kb.nextInt();
+                kb.nextLine();
+                System.out.println();
+
+                if(choiceMainMenu == 1 || choiceMainMenu == 2) {
                     loop = false;
                 } else {
                     ui.mainMenuNumberError();
@@ -59,7 +66,7 @@ class GameEngine{
             }
         }
 
-        switch(choice){
+        switch(choiceMainMenu){
             case 1: 
                 playGame();
                 break;
@@ -75,7 +82,28 @@ class GameEngine{
      * commences game of tictactoe
      */
     public void playGame(){
+        decisionXorO();
 
+        
+    }
+
+    /**
+     * have user choose X or O to play the game
+     */
+    public void decisionXorO() {
+        boolean loop = true;
+
+        while (loop) {
+            ui.chooseXorO();
+            choiceXorO = kb.nextLine();
+            System.out.println();
+
+            if (choiceXorO.toUpperCase().equals("X") || choiceXorO.toUpperCase().equals("O")) {
+                loop = false;
+            } else {
+                ui.xorOErrorChoice();
+            }
+        }
     }
 
     /**

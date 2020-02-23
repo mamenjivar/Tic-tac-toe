@@ -54,6 +54,24 @@ class UserInterface {
         System.out.println("The number you have chosen is not in the choice provided, please choose another number\n");
     }
 
+    /**
+     * Have user choose between X or O to play game
+     */
+    public void chooseXorO() {
+        System.out.print("Please choose either X or O:\n"
+                        + ">> ");
+    }
+
+    /**
+     * When the user chooses a value outside X or O
+     */
+    public void xorOErrorChoice(){
+        System.out.println("The option you've provided is not valid, please try again");
+    }
+
+    /**
+     * Exits the game
+     */
     public void gameExit(){
         System.out.println("Game has been terminated...");
     }
