@@ -24,21 +24,6 @@ class Board {
     }
 
     /**
-     * Prints an empty board
-     */
-    public void printBoardEmpty() {
-        System.out.println("   |   |   ");
-        System.out.println("   |   |   ");
-        System.out.println("___|___|___");
-        System.out.println("   |   |   ");
-        System.out.println("   |   |   ");
-        System.out.println("___|___|___");
-        System.out.println("   |   |   ");
-        System.out.println("   |   |   ");
-        System.out.println("   |   |   ");
-    }
-
-    /**
      * prints a number board for reference
      */
     public void printBoardFull() {
@@ -96,17 +81,17 @@ class Board {
         } // diagonal left
         else if((boardArray[0] == xoroUser) && (boardArray[4] == xoroUser) && (boardArray[8] == xoroUser)) {
             return true;
-        }
+        } // diagonal right
         else if((boardArray[2] == xoroUser) && (boardArray[4] == xoroUser) && (boardArray[6] == xoroUser)) {
             return true;
-        }
+        } // no winner
         else {
             return false;
         }
     }
 
     /**
-     * checks if user wins
+     * checks if opponent wins
      * 
      * @return
      */
@@ -132,9 +117,11 @@ class Board {
         } // diagonal left
         else if ((boardArray[0] == xoroOpponent) && (boardArray[4] == xoroOpponent) && (boardArray[8] == xoroOpponent)) {
             return true;
-        } else if ((boardArray[2] == xoroOpponent) && (boardArray[4] == xoroOpponent) && (boardArray[6] == xoroOpponent)) {
+        } //  diagonal right
+        else if ((boardArray[2] == xoroOpponent) && (boardArray[4] == xoroOpponent) && (boardArray[6] == xoroOpponent)) {
             return true;
-        } else {
+        } // no winner yet
+        else {
             return false;
         }
     }

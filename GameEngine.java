@@ -101,7 +101,7 @@ class GameEngine{
                 while(playerLoop){
                     ui.userChooses();
                     gameChoice = kb.nextInt();
-
+                    
                     if (board.isValid(gameChoice - 1)) {
                         board.addtoBoardUser(gameChoice - 1);
                         playerLoop = false;
@@ -148,14 +148,7 @@ class GameEngine{
             }
         }
 
-        System.out.println("\nThe game has ended"); // MOVE THIS OUT
         gameWon(3);
-        board.printPlayingBoard();
-
-
-        // CHECK: if option is already taken
-        // CHECK: if board is full
-        // CHECK: throw exception if array out of bounds
     }
 
     /**

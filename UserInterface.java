@@ -126,6 +126,14 @@ class UserInterface {
     }
 
     /**
+     * when user or opponent chooses a number bigger than
+     * board size
+     */
+    public void optionError(){
+        System.out.println("Please choose a number within 1-9");
+    }
+
+    /**
      * Exits the game
      */
     public void gameExit(){
