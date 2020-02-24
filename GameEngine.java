@@ -93,22 +93,33 @@ class GameEngine{
         boolean loop = true;
         boolean playerLoop = true;
         boolean opponentLoop = true;
+        
         while(loop) {
             playerLoop = true;
             opponentLoop = true;
             // user making choice
             if (!board.isBoardFull()) {
                 while(playerLoop){
-                    ui.userChooses();
-                    gameChoice = kb.nextInt();
-                    
-                    if (board.isValid(gameChoice - 1)) {
-                        board.addtoBoardUser(gameChoice - 1);
-                        playerLoop = false;
+                    try{
+                        ui.userChooses();
+                        gameChoice = kb.nextInt();
 
-                        board.printPlayingBoard();
-                    } else {
-                        ui.invalidChoiceBoard();
+                        if (!(gameChoice < 1) && !(gameChoice > 9)) {
+                            if (board.isValid(gameChoice - 1)) {
+                                board.addtoBoardUser(gameChoice - 1);
+                                playerLoop = false;
+
+                                board.printPlayingBoard();
+                            } else {
+                                ui.invalidChoiceBoard();
+                            }
+                        } else {
+                            ui.optionError();
+                        }
+                    } catch(InputMismatchException e){
+                        System.out.println(e);
+                        ui.noLetterMainMenuError();
+                        kb.nextLine();
                     }
                 }
             } else {
